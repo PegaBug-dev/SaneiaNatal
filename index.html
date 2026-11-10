@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saneia Natal</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+     <header class="header">
+  <div class="container header-inner">
+    <div class="logo">
+      <div>
+        <h1>Saneia Natal</h1>
+        <p class="tagline">Registro cidadão de problemas de saneamento básico</p>
+      </div>
+    </div>
+    <nav class="nav">
+      <button class="nav-btn active" data-tab="registrar">Registrar</button>
+      <button class="nav-btn" data-tab="dashboard">Painel Público</button>
+      <button class="nav-btn" data-tab="admin">Desenvolvedores</button>
+    </nav>
+  </div>
+</header>
+
+<main class="container">
+
+  <section id="tab-registrar" class="tab-content active">
+    <div class="card">
+      <h2>Registre um problema no seu bairro</h2>
+      <p class="subtitle">Sua participação gera dados que ajudam a melhorar o saneamento de Natal (ODS 6).</p>
+
+      <form id="form-relato" class="form">
+        <div class="form-row">
+          <label for="bairro">Bairro</label>
+          <select id="bairro" required>
+            <option value="">Selecione seu bairro</option>
+          </select>
+        </div>
+
+        <div class="form-row">
+          <label for="categoria">Tipo de problema</label>
+          <select id="categoria" required>
+            <option value="">Selecione a categoria</option>
+            <option value="Esgoto a céu aberto">Esgoto a céu aberto</option>
+            <option value="Falta de água">Falta de água</option>
+            <option value="Baixa pressão de água">Baixa pressão de água</option>
+            <option value="Acúmulo de lixo">Acúmulo de lixo</option>
+            <option value="Problema de drenagem / alagamento">Problema de drenagem / alagamento</option>
+            <option value="Água contaminada / qualidade">Água contaminada / qualidade</option>
+            <option value="Vazamento de água">Vazamento de água</option>
+            <option value="Outros">Outros</option>
+          </select>
+        </div>
+
+        <div class="form-row">
+          <label for="descricao">Descrição da situação</label>
+          <textarea id="descricao" rows="4" maxlength="500" placeholder="Descreva o que você observa." required></textarea>
+          <small class="counter"><span id="char-count">0</span>/500</small>
+        </div>
+
+        <div class="form-row">
+          <label for="foto">Foto (opcional)</label>
+          <input type="file" id="foto" accept="image/*" />
+        </div>
+
+        <div class="form-row checkbox">
+          <label>
+            <input type="checkbox" id="anonimo" checked />
+            Enviar anonimamente
+          </label>
+        </div>
+
+        <button type="submit" class="btn-primary">Enviar relato</button>
+        <div id="form-feedback" class="feedback"></div>
+      </form>
+    </div>
+
+    <div class="card info">
+      <h3>Como funciona</h3>
+      <ul>
+        <li>Os relatos são agrupados por bairro e categoria de forma anônima.</li>
+        <li>Os dados alimentam um painel público e o painel de desenvolvedores.</li>
+        <li>Os relatórios podem ser enviados à Prefeitura de Natal.</li>
+        <li>Este é um projeto cidadão e não substitui os oficiais.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="tab-dashboard" class="tab-content">
+    <div class="card">
+      <h2>Painel Público</h2>
+      <div class="stats" id="stats"></div>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <h3>Bairros mais afetados</h3>
+        <div class="canvas-wrap"><canvas id="chart-bairros"></canvas></div>
+      </div>
+      <div class="card">
+        <h3>Problemas mais recorrentes</h3>
+        <div class="canvas-wrap"><canvas id="chart-categorias"></canvas></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Relatos por mês</h3>
+      <div class="canvas-wrap"><canvas id="chart-meses"></canvas></div>
+    </div>
+  </section>
+
+  <section id="tab-admin" class="tab-content">
+    <div class="card">
+      <h2>Painel dos Desenvolvedores</h2>
+      <div class="admin-actions">
+        <button class="btn-secondary" id="btn-export-json">Exportar JSON</button>
+        <button class="btn-secondary" id="btn-export-csv">Exportar CSV</button>
+        <button class="btn-secondary" id="btn-seed">Popular com dados de exemplo</button>
+        <button class="btn-danger" id="btn-clear">Limpar todos os dados</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Todos os relatos (<span id="total-relatos">0</span>)</h3>
+      <div class="table-wrap">
+        <table id="tabela-relatos">
+          <thead>
+            <tr>
+              <th>Data</th>
+              <th>Bairro</th>
+              <th>Categoria</th>
+              <th>Descrição</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <p>Projeto cidadão - ODS 6 - Água Potável e Saneamento - Natal/RN</p>
+  </div>
+</footer>
+<script src="script.js"></script>
+
+</body>
+</html>
